@@ -8,6 +8,7 @@
         <button type="button" @click="selectOption" class="btn btn-info btn-sm">option select from parent</button>
       </div>
       <div>
+        with disable on options
         <basic-select :options="options"
                       :selected-option="item"
                       placeholder="select item"
@@ -36,15 +37,15 @@
 
 <script>
   import { BasicSelect } from '../../lib'
-  
+
   export default {
     data () {
       return {
         options: [
           { value: '1', text: 'aa' + ' - ' + '1' },
-          { value: '2', text: 'ab' + ' - ' + '2' },
+          { value: '2', text: 'ab' + ' - ' + '2', disabled: true },
           { value: '3', text: 'bc' + ' - ' + '3' },
-          { value: '4', text: 'cd' + ' - ' + '4' },
+          { value: '4', text: 'cd' + ' - ' + '4', disabled: true },
           { value: '5', text: 'de' + ' - ' + '5' },
           { value: '6', text: 'ef' + ' - ' + '6' },
           { value: '10', text: 'ef' + ' - ' + '10' },

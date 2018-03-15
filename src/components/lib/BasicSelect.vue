@@ -29,7 +29,7 @@
          tabindex="-1">
       <template v-for="(option, idx) in filteredOptions">
         <div class="item"
-             :class="{ 'selected': option.selected, 'current': pointer === idx }"
+             :class="{ 'selected': option.selected, 'current': pointer === idx, 'item-disabled': option.hasOwnProperty('disabled') && option.disabled === true }"
              @click.stop="selectItem(option)"
              @mousedown="mousedownItem"
              @mouseenter="pointerSet(idx)">
@@ -44,7 +44,7 @@
   /* event : select */
   import common from './common'
   import { baseMixin, commonMixin } from './mixins'
-  
+
   export default {
     mixins: [baseMixin, commonMixin],
     props: {
@@ -143,6 +143,9 @@
         common.mousedownItem(this)
       },
       selectItem (option) {
+        if (option.hasOwnProperty('disabled') && option.disabled === true) {
+          return
+        }
         this.searchText = '' // reset text when select item
         this.closeOptions()
         this.$emit('select', option)
@@ -157,9 +160,15 @@
   .ui.dropdown .menu > .item:hover {
     background: none transparent !important;
   }
-  
+
   /* Menu Item Hover for Key event */
   .ui.dropdown .menu > .item.current {
     background: rgba(0, 0, 0, 0.05) !important;
+  }
+
+  .ui.dropdown .menu > .item-disabled {
+    color: rgba(128, 128, 128, 1)!important;
+    cursor: default!important;
+    pointer-events: none!important;
   }
 </style>
